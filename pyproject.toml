@@ -18,6 +18,7 @@ changelog_file = "CHANGELOG.md"
 hvcs = "github"
 commit_version_number = true
 tag_commit = true
+tag_format = "v{version}"
 upload_to_release = true
 build_command = """
    uv lock --upgrade-package "$PACKAGE_NAME"
