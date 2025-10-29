@@ -18,8 +18,18 @@ changelog_file = "CHANGELOG.md"
 hvcs = "github"
 commit_version_number = true
 tag_commit = true
+upload_to_release = true
 build_command = """
-    uv lock --upgrade-package "$PACKAGE_NAME"
-    git add uv.lock
-    uv build
+   uv lock --upgrade-package "$PACKAGE_NAME"
+   git add uv.lock
+   uv build
 """
+
+[tool.semantic_release.branches.develop]
+match = "develop"                 # Nom de la branche à matcher
+prerelease = true  
+
+[tool.semantic_release.commit_parser_options]
+allowed_tags = ["feat", "fix", "perf", "refactor"]
+minor_tags = ["feat"]
+patch_tags = ["fix", "perf", "refactor"]
