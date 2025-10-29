@@ -1,0 +1,22 @@
+name: Release
+on:
+  push:
+    branches: [develop]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Nécessaire pour analyser les commits
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install python-semantic-release
+      - name: Semantic Release
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: semantic-release publish

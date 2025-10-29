@@ -1,0 +1,25 @@
+[project]
+name = "qualite-eau-databricks-dlt"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dlt[databricks]>=1.17.1",
+    "great-expectations>=1.8.0",
+    "python-semantic-release>=10.4.1",
+]
+
+[tool.semantic_release]
+version_variable = "src/qualite_eau/__init__.py:__version__"
+branch = "main"
+prerelease_branches = ["develop"]
+changelog_file = "CHANGELOG.md"
+hvcs = "github"
+commit_version_number = true
+tag_commit = true
+build_command = """
+    uv lock --upgrade-package "$PACKAGE_NAME"
+    git add uv.lock
+    uv build
+"""
